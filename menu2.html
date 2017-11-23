@@ -1,0 +1,329 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>博客管理页面</title>
+<link rel="stylesheet" href="css/style.default.css" type="text/css" />
+<script type="text/javascript" src="js/plugins/jquery-1.7.min.js"></script>
+<script type="text/javascript" src="js/plugins/jquery-ui-1.8.16.custom.min.js"></script>
+<script type="text/javascript" src="js/plugins/jquery.cookie.js"></script>
+<script type="text/javascript" src="js/plugins/jquery.alerts.js"></script>
+<script type="text/javascript" src="js/plugins/jquery.uniform.min.js"></script>
+<script type="text/javascript" src="js/custom/general.js"></script>
+<script type="text/javascript" src="js/custom/blog.js"></script>
+<!--[if IE 9]>
+    <link rel="stylesheet" media="screen" href="css/style.ie9.css"/>
+<![endif]-->
+<!--[if IE 8]>
+    <link rel="stylesheet" media="screen" href="css/style.ie8.css"/>
+<![endif]-->
+<!--[if lt IE 9]>
+	<script src="js/plugins/css3-mediaqueries.js"></script>
+<![endif]-->
+
+    <style>
+        .stdformbutton{
+            text-align: center;
+        }
+    </style>
+</head>
+<body class="withvernav">
+<div class="bodywrapper">
+    <div class="topheader">
+        <div class="left">
+           <h1 class="logo">和苏<span>信息科技</span></h1>
+            <span class="slogan">后台管理系统</span>
+            
+            <div class="search">
+            	<form action="" method="post">
+                	<input type="text" name="keyword" id="keyword" value="Enter keyword(s)" />
+                    <button class="submitbutton"></button>
+                </form>
+            </div><!--search-->
+            
+            <br clear="all" />
+            
+        </div><!--left-->
+        
+        <div class="right">
+        	<!--<div class="notification">
+                <a class="count" href="notifications.html"><span>9</span></a>
+        	</div>
+			-->
+        	<div class="userinfo">
+            	<img src="images/thumbs/avatar.png" alt="" />
+                <span>Juan Dela Cruz</span>
+            </div><!--userinfo-->
+            
+            <div class="userinfodrop">
+            	<div class="avatar">
+                	<a href=""><img src="images/thumbs/avatarbig.png" alt="" /></a>
+                    <div class="changetheme">
+                    	Change theme: <br />
+                    	<a class="default"></a>
+                        <a class="blueline"></a>
+                        <a class="greenline"></a>
+                        <a class="contrast"></a>
+                        <a class="custombg"></a>
+                    </div>
+                </div><!--avatar-->
+                <div class="userdata">
+                	<h4>Juan Dela Cruz</h4>
+                    <span class="email">youremail@yourdomain.com</span>
+                    <ul>
+                    	<li><a href="editprofile.html">Edit Profile</a></li>
+                        <li><a href="accountsettings.html">Account Settings</a></li>
+                        <li><a href="help.html">Help</a></li>
+                        <li><a href="index.html">Sign Out</a></li>
+                    </ul>
+                </div><!--userdata-->
+            </div><!--userinfodrop-->
+        </div><!--right-->
+    </div><!--topheader-->
+
+
+    <div class="header">
+        <ul class="headermenu">
+            <li><a href="index2.html"><span class="icon icon-flatscreen"></span>首页</a></li>
+            <li><a href="menu1.html"><span class="icon icon-pencil"></span>基础设置</a></li>
+            <li><a href=""><span class="icon icon-speech"></span>用户管理</a></li>
+            <li><a href="material.html"><span class="icon icon-speech"></span>素材管理</a></li>
+            <li><a href="message.html"><span class="icon icon-message"></span>群发消息</a></li>
+            <li><a href=""><span class="icon icon-chart"></span>统计分析</a></li>
+        </ul>
+
+    </div><!--header-->
+    
+    <div class="vernav">
+    	<ul>
+            <li><a href="menu1.html">菜单信息</a></li>
+        	<li class="current"><a href="menu2.html" class="editor">菜单录入</a></li>
+            <li><a href="">菜单同步到微信</a></li>
+            <li><a href="menu6.html">菜单编辑</a></li>
+            <li><a href="">菜单删除</a></li>
+        </ul>
+        <a class="togglemenu"></a>
+    </div><!--leftmenu-->
+    
+    <div class="centercontent">
+
+        <div class="pageheader contenttitle2">
+            <h1 class="pagetitle">菜单录入</h1>
+        </div><!--pageheader-->
+    
+        <!--<div class="pageheader">-->
+            <!--<h1 class="pagetitle">菜单录入</h1>-->
+            <!--&lt;!&ndash;<span class="pagedesc">The content below are loaded using ajax</span>&ndash;&gt;-->
+            <!---->
+            <!--&lt;!&ndash;<ul class="hornav blogmenu">&ndash;&gt;-->
+                <!--&lt;!&ndash;<li class="current"><a href="allposts.html">All Post (5)</a></li>&ndash;&gt;-->
+                <!--&lt;!&ndash;<li><a href="published.html">Published (5)</a></li>&ndash;&gt;-->
+                <!--&lt;!&ndash;<li><a href="draft.html">Draft (3)</a></li>&ndash;&gt;-->
+                <!--&lt;!&ndash;<li><a href="trash.html">Trash (1)</a></li>&ndash;&gt;-->
+            <!--&lt;!&ndash;</ul>&ndash;&gt;-->
+            <!--&lt;!&ndash;<form action="">&ndash;&gt;-->
+                <!--&lt;!&ndash;<table style="border: 1px solid #ccc">&ndash;&gt;-->
+                    <!--&lt;!&ndash;<tr>&ndash;&gt;-->
+                        <!--&lt;!&ndash;<td><label for="txtname">菜单名称：</label></td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;<td colspan="3"><input type="text" id="txtname" name="txtname" value="" placeholder="请输入菜单名称"></td>&ndash;&gt;-->
+                    <!--&lt;!&ndash;</tr>&ndash;&gt;-->
+                    <!--&lt;!&ndash;<tr>&ndash;&gt;-->
+                        <!--&lt;!&ndash;<td><label for="txtname">动作设置：</label></td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;<td colspan="3">&ndash;&gt;-->
+                            <!--&lt;!&ndash;<select name="" id="">&ndash;&gt;-->
+                                <!--&lt;!&ndash;<option value="消息触发类" checked="checked">消息触发类</option>&ndash;&gt;-->
+                                <!--&lt;!&ndash;<option value="网页链接类">网页链接类</option>&ndash;&gt;-->
+                            <!--&lt;!&ndash;</select>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<span class="Validform_checktip">请设置动作</span>&ndash;&gt;-->
+                        <!--&lt;!&ndash;</td>&ndash;&gt;-->
+                    <!--&lt;!&ndash;</tr>&ndash;&gt;-->
+                    <!--&lt;!&ndash;<tr>&ndash;&gt;-->
+                        <!--&lt;!&ndash;<td><label for="txtname">消息类型：</label></td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;<td class="value" colspan="3">&ndash;&gt;-->
+                            <!--&lt;!&ndash;<input type="radio" value="text" name="msgType" id="msgType" datatype="*" checked="checked">文本&ndash;&gt;-->
+                            <!--&lt;!&ndash;<input type="radio" value="news" name="msgType">图文&ndash;&gt;-->
+                            <!--&lt;!&ndash;<input type="radio" value="voice" name="msgType">音频&ndash;&gt;-->
+                            <!--&lt;!&ndash;<input type="radio" value="video" name="msgType">视频&ndash;&gt;-->
+                            <!--&lt;!&ndash;<input type="radio" value="image" name="msgType">图片&ndash;&gt;-->
+                            <!--&lt;!&ndash;<input type="radio" value="expand" name="msgType">扩展&ndash;&gt;-->
+                            <!--&lt;!&ndash;<input type="radio" value="link" name="msgType">链接&ndash;&gt;-->
+                            <!--&lt;!&ndash;<span class="Validform_checktip">请选择消息类型</span>&ndash;&gt;-->
+                        <!--&lt;!&ndash;</td>&ndash;&gt;-->
+                    <!--&lt;!&ndash;</tr>&ndash;&gt;-->
+                    <!--&lt;!&ndash;<tr>&ndash;&gt;-->
+                        <!--&lt;!&ndash;<td><label for="txtname">选择模板：</label></td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;<td class="value" colspan="3">&ndash;&gt;-->
+                            <!--&lt;!&ndash;<div id="templateSelect" style="display: none;">&ndash;&gt;-->
+                                <!--&lt;!&ndash;<select name="templateId" id="templateId"></select>&ndash;&gt;-->
+                                <!--&lt;!&ndash;<span class="Validform_checktip">选择模板</span>&ndash;&gt;-->
+                                <!--&lt;!&ndash;&lt;!&ndash; add-begin-gengjiajia 2016-12-07 for：TASK #1197 {联通}【平台】关注欢迎语、未识别回复语、关键字、自定义菜单等选择素材时，显示预览按钮 &ndash;&gt;&ndash;&gt;-->
+                                <!--&lt;!&ndash;<span id="previewId" style="display: none;">&ndash;&gt;-->
+		      <!--&lt;!&ndash;<a href="#" class="easyui-linkbutton l-btn l-btn-plain" plain="true" onclick="previewTemplate()" id=""><span class="l-btn-left"><span class="l-btn-text"><span class="l-btn-text icon-search l-btn-icon-left">链接预览</span></span></span></a>&ndash;&gt;-->
+		  <!--&lt;!&ndash;</span>&ndash;&gt;-->
+                            <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                            <!--&lt;!&ndash;&lt;!&ndash; 文本  &ndash;&gt;&ndash;&gt;-->
+                            <!--&lt;!&ndash;<div id="msgType_text" class="msgType" style="display: block;">&ndash;&gt;-->
+                                <!--&lt;!&ndash;<input type="hidden" value="" id="resContentname">&ndash;&gt;-->
+                                <!--&lt;!&ndash;<input name="resContentname" class="inputxt Validform_error" value="" readonly="readonly" datatype="*" nullmsg="请填写信息！">&ndash;&gt;-->
+                                <!--&lt;!&ndash;<a href="#" class="easyui-linkbutton l-btn l-btn-plain" plain="true" icon="icon-search" onclick="choose_ff8080815f713e99015f9abde6c10862()"><span class="l-btn-left"><span class="l-btn-text icon-search l-btn-icon-left">选择</span></span></a><a href="#" class="easyui-linkbutton l-btn l-btn-plain" plain="true" icon="icon-redo" onclick="clearAll_ff8080815f713e99015f9abde6c10862();" id=""><span class="l-btn-left"><span class="l-btn-text icon-redo l-btn-icon-left">清空</span></span></a><script type="text/javascript">var windowapi = frameElement.api, W = windowapi.opener;function choose_ff8080815f713e99015f9abde6c10862(){var url = 'menuManagerController.do?gettemplateForSelect&msgType=text';var initValue = $('#resContentname').val();url += '&ids='+initValue;if(typeof(windowapi) == 'undefined'){$.dialog({content: 'url:'+url,zIndex: getzIndex(false),title: '选择列表',lock : true,width :400,height :350,left :'85%',top :'65%',opacity : 0.4,button : [ {name : '确认',callback : clickcallback_ff8080815f713e99015f9abde6c10862,focus : true}, {name : '取消',callback : function() {}} ]});}else{$.dialog({content: 'url:'+url,zIndex: getzIndex(false),title: '选择列表',lock : true,parent:windowapi,width :400,height :350,left :'85%',top :'65%',opacity : 0.4,button : [ {name : '确认',callback : clickcallback_ff8080815f713e99015f9abde6c10862,focus : true}, {name : '取消',callback : function() {}} ]});}}function clearAll_ff8080815f713e99015f9abde6c10862(){if($('#resContentname').length>=1){$('#resContentname').val('');$('#resContentname').blur();}if($("input[name='resContentname']").length>=1){$("input[name='resContentname']").val('');$("input[name='resContentname']").blur();}$('#resContentname').val("");}function clickcallback_ff8080815f713e99015f9abde6c10862(){iframe = this.iframe.contentWindow;var resContentname=iframe.getgettemplateForSelectListSelections('resContentname');	if($('#resContentname').length>=1){$('#resContentname').val(resContentname);$('#resContentname').blur();}if($("input[name='resContentname']").length>=1){$("input[name='resContentname']").val(resContentname);$("input[name='resContentname']").blur();}var id =iframe.getgettemplateForSelectListSelections('resContentid');if (id!== undefined &&id!=""){$('#resContentname').val(id);}}</script>&ndash;&gt;-->
+                                <!--&lt;!&ndash;<a href="#" class="easyui-linkbutton l-btn l-btn-plain" plain="true" onclick="previewTemplate()" id=""><span class="l-btn-left"><span class="l-btn-text"><span class="l-btn-text icon-search l-btn-icon-left">文本预览</span></span></span></a>&ndash;&gt;-->
+                                <!--&lt;!&ndash;<span class="Validform_checktip Validform_wrong">请填写信息！</span></div>&ndash;&gt;-->
+                            <!--&lt;!&ndash;&lt;!&ndash; 图文  &ndash;&gt;&ndash;&gt;-->
+                            <!--&lt;!&ndash;<div id="msgType_news" class="msgType" style="display: none;">&ndash;&gt;-->
+                                <!--&lt;!&ndash;<input type="hidden" value="" id="resContentname">&ndash;&gt;-->
+                                <!--&lt;!&ndash;<input name="resContentname" class="inputxt" value="" readonly="readonly">&ndash;&gt;-->
+                                <!--&lt;!&ndash;<a href="#" class="easyui-linkbutton l-btn l-btn-plain" plain="true" icon="icon-search" onclick="choose_ff8080815f713e99015f9abde6c10863()" id=""><span class="l-btn-left"><span class="l-btn-text icon-search l-btn-icon-left">选择</span></span></a><a href="#" class="easyui-linkbutton l-btn l-btn-plain" plain="true" icon="icon-redo" onclick="clearAll_ff8080815f713e99015f9abde6c10863();" id=""><span class="l-btn-left"><span class="l-btn-text icon-redo l-btn-icon-left">清空</span></span></a><script type="text/javascript">var windowapi = frameElement.api, W = windowapi.opener;function choose_ff8080815f713e99015f9abde6c10863(){var url = 'menuManagerController.do?gettemplateForSelect&msgType=news';var initValue = $('#resContentname').val();url += '&ids='+initValue;if(typeof(windowapi) == 'undefined'){$.dialog({content: 'url:'+url,zIndex: getzIndex(false),title: '选择列表',lock : true,width :400,height :350,left :'85%',top :'65%',opacity : 0.4,button : [ {name : '确认',callback : clickcallback_ff8080815f713e99015f9abde6c10863,focus : true}, {name : '取消',callback : function() {}} ]});}else{$.dialog({content: 'url:'+url,zIndex: getzIndex(false),title: '选择列表',lock : true,parent:windowapi,width :400,height :350,left :'85%',top :'65%',opacity : 0.4,button : [ {name : '确认',callback : clickcallback_ff8080815f713e99015f9abde6c10863,focus : true}, {name : '取消',callback : function() {}} ]});}}function clearAll_ff8080815f713e99015f9abde6c10863(){if($('#resContentname').length>=1){$('#resContentname').val('');$('#resContentname').blur();}if($("input[name='resContentname']").length>=1){$("input[name='resContentname']").val('');$("input[name='resContentname']").blur();}$('#resContentname').val("");}function clickcallback_ff8080815f713e99015f9abde6c10863(){iframe = this.iframe.contentWindow;var resContentname=iframe.getgettemplateForSelectListSelections('resContentname');	if($('#resContentname').length>=1){$('#resContentname').val(resContentname);$('#resContentname').blur();}if($("input[name='resContentname']").length>=1){$("input[name='resContentname']").val(resContentname);$("input[name='resContentname']").blur();}var id =iframe.getgettemplateForSelectListSelections('resContentid');if (id!== undefined &&id!=""){$('#resContentname').val(id);}}</script>&ndash;&gt;-->
+                                <!--&lt;!&ndash;<a href="#" class="easyui-linkbutton l-btn l-btn-plain" plain="true" onclick="previewTemplate()" id=""><span class="l-btn-left"><span class="l-btn-text"><span class="l-btn-text icon-search l-btn-icon-left">图文预览</span></span></span></a>&ndash;&gt;-->
+                            <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                            <!--&lt;!&ndash;&lt;!&ndash; 语音  &ndash;&gt;&ndash;&gt;-->
+                            <!--&lt;!&ndash;<div id="msgType_voice" class="msgType" style="display: none;">&ndash;&gt;-->
+                                <!--&lt;!&ndash;<input type="hidden" value="" id="resContentname">&ndash;&gt;-->
+                                <!--&lt;!&ndash;<input name="resContentname" class="inputxt" value="" readonly="readonly">&ndash;&gt;-->
+                                <!--&lt;!&ndash;<a href="#" class="easyui-linkbutton l-btn l-btn-plain" plain="true" icon="icon-search" onclick="choose_ff8080815f713e99015f9abde6c10864()" id=""><span class="l-btn-left"><span class="l-btn-text icon-search l-btn-icon-left">选择</span></span></a><a href="#" class="easyui-linkbutton l-btn l-btn-plain" plain="true" icon="icon-redo" onclick="clearAll_ff8080815f713e99015f9abde6c10864();" id=""><span class="l-btn-left"><span class="l-btn-text icon-redo l-btn-icon-left">清空</span></span></a><script type="text/javascript">var windowapi = frameElement.api, W = windowapi.opener;function choose_ff8080815f713e99015f9abde6c10864(){var url = 'menuManagerController.do?gettemplateForSelect&msgType=voice';var initValue = $('#resContentname').val();url += '&ids='+initValue;if(typeof(windowapi) == 'undefined'){$.dialog({content: 'url:'+url,zIndex: getzIndex(false),title: '选择列表',lock : true,width :400,height :350,left :'85%',top :'65%',opacity : 0.4,button : [ {name : '确认',callback : clickcallback_ff8080815f713e99015f9abde6c10864,focus : true}, {name : '取消',callback : function() {}} ]});}else{$.dialog({content: 'url:'+url,zIndex: getzIndex(false),title: '选择列表',lock : true,parent:windowapi,width :400,height :350,left :'85%',top :'65%',opacity : 0.4,button : [ {name : '确认',callback : clickcallback_ff8080815f713e99015f9abde6c10864,focus : true}, {name : '取消',callback : function() {}} ]});}}function clearAll_ff8080815f713e99015f9abde6c10864(){if($('#resContentname').length>=1){$('#resContentname').val('');$('#resContentname').blur();}if($("input[name='resContentname']").length>=1){$("input[name='resContentname']").val('');$("input[name='resContentname']").blur();}$('#resContentname').val("");}function clickcallback_ff8080815f713e99015f9abde6c10864(){iframe = this.iframe.contentWindow;var resContentname=iframe.getgettemplateForSelectListSelections('resContentname');	if($('#resContentname').length>=1){$('#resContentname').val(resContentname);$('#resContentname').blur();}if($("input[name='resContentname']").length>=1){$("input[name='resContentname']").val(resContentname);$("input[name='resContentname']").blur();}var id =iframe.getgettemplateForSelectListSelections('resContentid');if (id!== undefined &&id!=""){$('#resContentname').val(id);}}</script>&ndash;&gt;-->
+                                <!--&lt;!&ndash;<a href="#" class="easyui-linkbutton l-btn l-btn-plain" plain="true" onclick="previewTemplate()" id=""><span class="l-btn-left"><span class="l-btn-text"><span class="l-btn-text icon-search l-btn-icon-left">语音预览</span></span></span></a>&ndash;&gt;-->
+                            <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                            <!--&lt;!&ndash;&lt;!&ndash; 视频  &ndash;&gt;&ndash;&gt;-->
+                            <!--&lt;!&ndash;<div id="msgType_video" class="msgType" style="display: none;">&ndash;&gt;-->
+                                <!--&lt;!&ndash;<input type="hidden" value="" id="resContentname">&ndash;&gt;-->
+                                <!--&lt;!&ndash;<input name="resContentname" class="inputxt" value="" readonly="readonly">&ndash;&gt;-->
+                                <!--&lt;!&ndash;<a href="#" class="easyui-linkbutton l-btn l-btn-plain" plain="true" icon="icon-search" onclick="choose_ff8080815f713e99015f9abde6c10865()" id=""><span class="l-btn-left"><span class="l-btn-text icon-search l-btn-icon-left">选择</span></span></a><a href="#" class="easyui-linkbutton l-btn l-btn-plain" plain="true" icon="icon-redo" onclick="clearAll_ff8080815f713e99015f9abde6c10865();" id=""><span class="l-btn-left"><span class="l-btn-text icon-redo l-btn-icon-left">清空</span></span></a><script type="text/javascript">var windowapi = frameElement.api, W = windowapi.opener;function choose_ff8080815f713e99015f9abde6c10865(){var url = 'menuManagerController.do?gettemplateForSelect&msgType=video';var initValue = $('#resContentname').val();url += '&ids='+initValue;if(typeof(windowapi) == 'undefined'){$.dialog({content: 'url:'+url,zIndex: getzIndex(false),title: '选择列表',lock : true,width :400,height :350,left :'85%',top :'65%',opacity : 0.4,button : [ {name : '确认',callback : clickcallback_ff8080815f713e99015f9abde6c10865,focus : true}, {name : '取消',callback : function() {}} ]});}else{$.dialog({content: 'url:'+url,zIndex: getzIndex(false),title: '选择列表',lock : true,parent:windowapi,width :400,height :350,left :'85%',top :'65%',opacity : 0.4,button : [ {name : '确认',callback : clickcallback_ff8080815f713e99015f9abde6c10865,focus : true}, {name : '取消',callback : function() {}} ]});}}function clearAll_ff8080815f713e99015f9abde6c10865(){if($('#resContentname').length>=1){$('#resContentname').val('');$('#resContentname').blur();}if($("input[name='resContentname']").length>=1){$("input[name='resContentname']").val('');$("input[name='resContentname']").blur();}$('#resContentname').val("");}function clickcallback_ff8080815f713e99015f9abde6c10865(){iframe = this.iframe.contentWindow;var resContentname=iframe.getgettemplateForSelectListSelections('resContentname');	if($('#resContentname').length>=1){$('#resContentname').val(resContentname);$('#resContentname').blur();}if($("input[name='resContentname']").length>=1){$("input[name='resContentname']").val(resContentname);$("input[name='resContentname']").blur();}var id =iframe.getgettemplateForSelectListSelections('resContentid');if (id!== undefined &&id!=""){$('#resContentname').val(id);}}</script>&ndash;&gt;-->
+                                <!--&lt;!&ndash;<a href="#" class="easyui-linkbutton l-btn l-btn-plain" plain="true" onclick="previewTemplate()" id=""><span class="l-btn-left"><span class="l-btn-text"><span class="l-btn-text icon-search l-btn-icon-left">视频预览</span></span></span></a>&ndash;&gt;-->
+                            <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                            <!--&lt;!&ndash;&lt;!&ndash; 图片  &ndash;&gt;&ndash;&gt;-->
+                            <!--&lt;!&ndash;<div id="msgType_image" class="msgType" style="display: none;">&ndash;&gt;-->
+                                <!--&lt;!&ndash;<input type="hidden" value="" id="resContentname">&ndash;&gt;-->
+                                <!--&lt;!&ndash;<input name="resContentname" class="inputxt" value="" readonly="readonly">&ndash;&gt;-->
+                                <!--&lt;!&ndash;<a href="#" class="easyui-linkbutton l-btn l-btn-plain" plain="true" icon="icon-search" onclick="choose_ff8080815f713e99015f9abde6c10866()" id=""><span class="l-btn-left"><span class="l-btn-text icon-search l-btn-icon-left">选择</span></span></a><a href="#" class="easyui-linkbutton l-btn l-btn-plain" plain="true" icon="icon-redo" onclick="clearAll_ff8080815f713e99015f9abde6c10866();" id=""><span class="l-btn-left"><span class="l-btn-text icon-redo l-btn-icon-left">清空</span></span></a><script type="text/javascript">var windowapi = frameElement.api, W = windowapi.opener;function choose_ff8080815f713e99015f9abde6c10866(){var url = 'menuManagerController.do?gettemplateForSelect&msgType=image';var initValue = $('#resContentname').val();url += '&ids='+initValue;if(typeof(windowapi) == 'undefined'){$.dialog({content: 'url:'+url,zIndex: getzIndex(false),title: '选择列表',lock : true,width :400,height :350,left :'85%',top :'65%',opacity : 0.4,button : [ {name : '确认',callback : clickcallback_ff8080815f713e99015f9abde6c10866,focus : true}, {name : '取消',callback : function() {}} ]});}else{$.dialog({content: 'url:'+url,zIndex: getzIndex(false),title: '选择列表',lock : true,parent:windowapi,width :400,height :350,left :'85%',top :'65%',opacity : 0.4,button : [ {name : '确认',callback : clickcallback_ff8080815f713e99015f9abde6c10866,focus : true}, {name : '取消',callback : function() {}} ]});}}function clearAll_ff8080815f713e99015f9abde6c10866(){if($('#resContentname').length>=1){$('#resContentname').val('');$('#resContentname').blur();}if($("input[name='resContentname']").length>=1){$("input[name='resContentname']").val('');$("input[name='resContentname']").blur();}$('#resContentname').val("");}function clickcallback_ff8080815f713e99015f9abde6c10866(){iframe = this.iframe.contentWindow;var resContentname=iframe.getgettemplateForSelectListSelections('resContentname');	if($('#resContentname').length>=1){$('#resContentname').val(resContentname);$('#resContentname').blur();}if($("input[name='resContentname']").length>=1){$("input[name='resContentname']").val(resContentname);$("input[name='resContentname']").blur();}var id =iframe.getgettemplateForSelectListSelections('resContentid');if (id!== undefined &&id!=""){$('#resContentname').val(id);}}</script>&ndash;&gt;-->
+                                <!--&lt;!&ndash;<a href="#" class="easyui-linkbutton l-btn l-btn-plain" plain="true" onclick="previewTemplate()" id=""><span class="l-btn-left"><span class="l-btn-text"><span class="l-btn-text icon-search l-btn-icon-left">图片预览</span></span></span></a>&ndash;&gt;-->
+                                <!--&lt;!&ndash;&lt;!&ndash; add-end-gengjiajia 2016-12-07 for：TASK #1197 {联通}【平台】关注欢迎语、未识别回复语、关键字、自定义菜单等选择素材时，显示预览按钮 &ndash;&gt;&ndash;&gt;-->
+                            <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                        <!--&lt;!&ndash;</td>&ndash;&gt;-->
+                    <!--&lt;!&ndash;</tr>&ndash;&gt;-->
+                    <!--&lt;!&ndash;<tr>&ndash;&gt;-->
+                        <!--&lt;!&ndash;<td><label for="txtname">位置：</label></td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;<td class="value" colspan="3">&ndash;&gt;-->
+                            <!--&lt;!&ndash;&lt;!&ndash; <input id="orders" class="inputxt" name="orders" value="" datatype="num"> &ndash;&gt;&ndash;&gt;-->
+                            <!--&lt;!&ndash;<select name="orders" id="orders">&ndash;&gt;-->
+                                <!--&lt;!&ndash;<optgroup label="位置1">&ndash;&gt;-->
+                                    <!--&lt;!&ndash;<option value="1">一级菜单1</option>&ndash;&gt;-->
+                                    <!--&lt;!&ndash;<option value="11">子菜单1*1</option>&ndash;&gt;-->
+                                    <!--&lt;!&ndash;<option value="12">子菜单1*2</option>&ndash;&gt;-->
+                                    <!--&lt;!&ndash;<option value="13">子菜单1*3</option>&ndash;&gt;-->
+                                    <!--&lt;!&ndash;<option value="14">子菜单1*4</option>&ndash;&gt;-->
+                                    <!--&lt;!&ndash;<option value="15">子菜单1*5</option>&ndash;&gt;-->
+                                <!--&lt;!&ndash;</optgroup>&ndash;&gt;-->
+                                <!--&lt;!&ndash;<optgroup label="位置2">&ndash;&gt;-->
+                                    <!--&lt;!&ndash;<option value="2">一级菜单2</option>&ndash;&gt;-->
+                                    <!--&lt;!&ndash;<option value="21">子菜单2*1</option>&ndash;&gt;-->
+                                    <!--&lt;!&ndash;<option value="22">子菜单2*2</option>&ndash;&gt;-->
+                                    <!--&lt;!&ndash;<option value="23">子菜单2*3</option>&ndash;&gt;-->
+                                    <!--&lt;!&ndash;<option value="24">子菜单2*4</option>&ndash;&gt;-->
+                                    <!--&lt;!&ndash;<option value="25">子菜单2*5</option>&ndash;&gt;-->
+                                <!--&lt;!&ndash;</optgroup>&ndash;&gt;-->
+                                <!--&lt;!&ndash;<optgroup label="位置3">&ndash;&gt;-->
+                                    <!--&lt;!&ndash;<option value="3">一级菜单3</option>&ndash;&gt;-->
+                                    <!--&lt;!&ndash;<option value="31">子菜单3*1</option>&ndash;&gt;-->
+                                    <!--&lt;!&ndash;<option value="32">子菜单3*2</option>&ndash;&gt;-->
+                                    <!--&lt;!&ndash;<option value="33">子菜单3*3</option>&ndash;&gt;-->
+                                    <!--&lt;!&ndash;<option value="34">子菜单3*4</option>&ndash;&gt;-->
+                                    <!--&lt;!&ndash;<option value="35">子菜单3*5</option>&ndash;&gt;-->
+                                <!--&lt;!&ndash;</optgroup>&ndash;&gt;-->
+                            <!--&lt;!&ndash;</select>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<span class="Validform_checktip">填写显示顺序</span>&ndash;&gt;-->
+                        <!--&lt;!&ndash;</td>&ndash;&gt;-->
+                    <!--&lt;!&ndash;</tr>&ndash;&gt;-->
+                    <!--&lt;!&ndash;<tr>&ndash;&gt;-->
+                        <!--&lt;!&ndash;<td><label for="txtname">是否与子账号共享：</label></td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;<td class="value">&ndash;&gt;-->
+                            <!--&lt;!&ndash;<input type="radio" name="shareStatus" value="N" datatype="*" checked="checked">否&ndash;&gt;-->
+                            <!--&lt;!&ndash;<input type="radio" name="shareStatus" value="Y">是&ndash;&gt;-->
+                            <!--&lt;!&ndash;<span class="Validform_checktip">请选择共享状态！</span>&ndash;&gt;-->
+                        <!--&lt;!&ndash;</td>&ndash;&gt;-->
+                    <!--&lt;!&ndash;</tr>&ndash;&gt;-->
+                <!--&lt;!&ndash;</table>&ndash;&gt;-->
+            <!--&lt;!&ndash;</form>&ndash;&gt;-->
+
+    <!--</div>&lt;!&ndash;pageheader&ndash;&gt;-->
+        
+        <div id="contentwrapper" class="contentwrapper">
+            <form class="stdform stdform2" method="post" action="">
+                <p>
+                    <label>菜单名称:</label>
+                    <span class="field"><input type="text" name="firstname" id="firstname2" class="longinput" /></span>
+                </p>
+
+                <p>
+                    <label>动作设置:</label>
+                    <span class="field">
+                        <select name="selection" id="selection2">
+                            <option value="消息触发类" checked="checked">消息触发类</option>-->
+                            <option value="网页链接类">网页链接类</option>
+                    </select>
+                </span>
+                </p>
+
+                <p>
+                    <label>消息类型</label>
+                    <span class="field">
+                    <input type="radio" name="radiofield" checked="checked" /> 文本 &nbsp; &nbsp;
+                    <input type="radio" name="radiofield" /> 图文 &nbsp; &nbsp;
+                    <input type="radio" name="radiofield" /> 音频  &nbsp; &nbsp;
+                    <input type="radio" name="radiofield"  /> 视频  &nbsp; &nbsp;
+                    <input type="radio" name="radiofield"  /> 图片  &nbsp; &nbsp;
+                    <input type="radio" name="radiofield"  /> 扩展  &nbsp; &nbsp;
+                    <input type="radio" name="radiofield"  /> 链接  &nbsp; &nbsp;
+                </span>
+                </p>
+
+                <p>
+                    <label>选择模板:</label>
+                    <span class="field"><input type="text" name="email" id="email2" class="longinput" /></span>
+                </p>
+
+                <p>
+                    <label>位置:</label>
+                    <span class="field">
+                    <select name="selection" id="selection3">
+                        <optgroup label="位置1">
+                        <option value="1">一级菜单1</option>
+                        <option value="11">子菜单1*1</option>
+                        <option value="12">子菜单1*2</option>
+                        <option value="13">子菜单1*3</option>
+                        <option value="14">子菜单1*4</option>
+                        <option value="15">子菜单1*5</option>
+                        </optgroup>
+                        <optgroup label="位置2">
+                        <option value="2">一级菜单2</option>
+                        <option value="21">子菜单2*1</option>
+                        <option value="22">子菜单2*2</option>
+                        <option value="23">子菜单2*3</option>
+                        <option value="24">子菜单2*4</option>
+                        <option value="25">子菜单2*5</option>
+                        </optgroup>
+                    </select>
+                </span>
+                </p>
+
+                <p>
+                    <label>是否与子菜单共享:</label>
+                    <span class="field">
+                    <input type="radio" name="shareStatus" value="N" datatype="*" checked="checked">否 &nbsp; &nbsp;
+                    <input type="radio" name="shareStatus" value="Y">是
+                </span>
+                </p>
+
+                <p class="stdformbutton">
+                    <button class="submit radius2">提交</button> &nbsp; &nbsp;
+                    <input type="reset" class="reset radius2" value="重置" />
+                </p>
+            </form>
+        </div><!--contentwrapper-->
+    
+    </div><!--centercontent-->
+    
+    
+</div><!--bodywrapper-->
+
+</body>
+</html>

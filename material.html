@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>查看消息页面</title>
+<link rel="stylesheet" href="css/style.default.css" type="text/css" />
+<link rel="stylesheet" href="css/mask.css" type="text/css">
+<script type="text/javascript" src="js/plugins/jquery-1.7.min.js"></script>
+<script type="text/javascript" src="js/custom/messages.js"></script>
+<script type="text/javascript" src="js/plugins/jquery.uniform.min.js"></script>
+<script type="text/javascript" src="js/custom/productlist.js"></script>
+<!--<script type="text/javascript" src="js/custom/tables.js"></script>-->
+<script type="text/javascript" charset="utf-8" src="ueditor/ueditor.config.js"></script>
+<script type="text/javascript" charset="utf-8" src="js/ueditor/ueditor.all.min.js"></script>
+</head>
+
+<style>
+    .searchbox{
+        margin-right: 120px;
+    }
+    /*.dataTables_filter input{*/
+        /*width: 0px;*/
+    /*}*/
+    #simple {
+        width: 1000px;
+        border: 1px solid #ddd;
+    }
+    #imagetext,#imagetextdetial{
+        position:fixed;
+        z-index:1001;
+        background: #ddd;
+        height: 600px;
+        overflow: auto;
+        left: 30%;
+    }
+    #imagetextdetial{
+        width:1000px;
+    }
+    #dyntable2_wrapper_img{
+        border-bottom: 1px solid #dddddd;
+    }
+    .editleft{
+        width: 20%;
+        height:1000px;
+        float: left
+    }
+    .editright{
+        float: right;
+        width: 80%
+    }
+    .editleftadd{
+        width: 150px;
+        height: 80px;
+        background: #ccc;
+        position: relative;
+    }
+    .editleftadd a img{
+        border: 0;
+        width: 32px;
+        height: 32px;
+        position: absolute;
+        top: 30%;
+        left: 40%;
+    }
+    .stdtable input{
+        width: 19px;
+        height:19px;
+    }
+</style>
+
+<body class="withvernav">
+<div class="bodywrapper">
+    <div class="headercontent">
+
+    </div><!--header-->
+
+    <div class="mediatecontent"></div><!--mediatecontent-->
+
+</div><!--bodywrapper-->
+
+</body>
+
+<script type="text/javascript" src="js/theme/header.js"></script>
+<script type="text/javascript" src="js/theme/material.js"></script>
+<script type="text/javascript" src="js/custom/common.js"></script>
+<script type="text/javascript" charset="utf-8" src="js/ueditor/editor_api.js"></script>
+<!-- Datatables -->
+<!--<link href="css/datatable/dataTables.bootstrap.min.css" rel="stylesheet">-->
+<!--<link href="css/datatable/buttons.bootstrap.min.css" rel="stylesheet">-->
+<!--<link href="css/datatable/fixedHeader.bootstrap.min.css" rel="stylesheet">-->
+<!--<link href="css/datatable/responsive.bootstrap.min.css" rel="stylesheet">-->
+<!--<link href="css/datatable/scroller.bootstrap.min.css" rel="stylesheet">-->
+
+<script src="js/datatable/jquery.dataTables.min.js"></script>
+<script src="js/datatable/dataTables.bootstrap.min.js"></script>
+<script src="js/datatable/dataTables.buttons.min.js"></script>
+<script src="js/datatable/buttons.bootstrap.min.js"></script>
+<script src="js/datatable/buttons.flash.min.js"></script>
+<script src="js/datatable/buttons.html5.min.js"></script>
+<script src="js/datatable/buttons.print.min.js"></script>
+<script src="js/datatable/dataTables.responsive.min.js"></script>
+<script src="js/datatable/responsive.bootstrap.js"></script>
+<script src="js/datatable/datatables.scroller.min.js"></script>
+
+
+<script>
+    $("#uploadimagetext").click(function(){
+        $("#imagetext").css("display","block");
+        openNew("imagetext");
+    });
+    $("#uploadtext").click(function(){
+        $("#text").css("display","block");
+        openNew("text");
+    });
+    $("#uploadvoice").click(function(){
+        $("#voice").css("display","block");
+        openNew("voice");
+    });
+    $("#uploadvideo").click(function(){
+        $("#video").css("display","block");
+        openNew("video");
+    });
+    $("#newpicturegroup").click(function(){
+        $("#picturegroup").css("display","block");
+        openNew("picturegroup");
+    });
+    
+    $("#editimagetext").click(function () {
+        $("#imagetextdetial").css("display","block");
+        openNew("imagetextdetial");
+    })
+    $(".editleftadd a").click(function () {
+        $("#editright").show();
+    })
+
+    $(document).ready(function(){
+        var editor = new baidu.editor.ui.Editor();
+        editor.render("myEditor");
+    })
+
+    //添加图文素材模板名称
+    function addNewsMaterial(){
+        var material_name= $("#material_name").val();
+        $.ajax({
+            url: "/bpawn5/news/addNewsMaterial",
+            type:"POST",
+            contentType: "text/html;charset=utf-8",
+            data:JSON.stringify({'news_name':material_name}),
+            success: function(data){
+                alert(JSON.stringify(data));
+            },
+            error: function(err){
+                console.log(err);
+            }
+        });
+    }
+//    查找图文素材模板名称
+    function queryNewsMaterial(){
+        var $table = $("#dyntable_img_text");
+        var _table = $table.dataTable($.extend(true,{},CONSTANT.DATA_TABLES.DEFAULT_OPTION, {
+            ajax : function(data, callback, settings) {
+                //封装请求参数
+                var param = JSON.stringify({'page':1,'rows':10});
+//                var param = userManage.getQueryCondition(data);
+                $.ajax({
+                    type: "post",
+                    url:"/bpawn5/news/queryNewsMaterial",
+                    contentType: "text/html;charset=utf-8",
+                    cache : false,  //禁用缓存
+                    data: param,    //传入已封装的参数
+                    dataType: "json",
+                    success: function(result) {
+                        console.log(result)
+                        //异常判断与处理
+                        if (result.errorCode) {
+                            alert("查询失败");
+                            return;
+                        }
+                        //封装返回数据
+                        var returnData = {};
+                        returnData.draw = data.draw;//这里直接自行返回了draw计数器,应该由后台返回
+                        returnData.recordsTotal = result.totalCount;//总记录数
+                        returnData.recordsFiltered = result.totalCount;//后台不实现过滤功能，每次查询均视作全部结果
+                        returnData.data = result.newsMaterials;
+                        //调用DataTables提供的callback方法，代表数据已封装完成并传回DataTables进行渲染
+                        //此时的数据需确保正确无误，异常判断应在执行此回调前自行处理完毕
+                        callback(returnData);
+                    },
+                    error: function(XMLHttpRequest, textStatus, errorThrown) {
+                        alert("查询失败");
+                    }
+                });
+            },
+            //绑定数据
+            columns: [
+                {
+                    data: "sys_id",
+                    render: function(data,row,type,meta){
+                        return "<div class='checker' id='uniform-undefined'><span class='center'><input type='checkbox' name='imagetext' style='opacity: 0;'></span></div>"
+                    }
+                },
+                {
+                    data: "news_name",//字段名
+                },
+                {
+                    data: "sys_id",//字段名
+                },
+                {
+                    data: "",//字段名
+                },
+
+                {
+                    data: "",//字段名
+                },
+                {
+                    data: "",//字段名
+                },
+//                {
+//                    data : "carrierStatus",//字段名
+//                    render : function(data,type, row, meta) {
+//                        return (data == 1? "可以查发":data == 2?"可以链接":data == 3?"仅供查询":"不可用");
+//                    }
+//                },
+//                {
+//                    data : "carrierLink",//字段名
+//                    orderable : false,//禁用排序
+//                    render : CONSTANT.DATA_TABLES.RENDER.ELLIPSIS//alt效果
+//                },
+                {
+                    data: null,//字段名
+                    defaultContent:"",//无默认值
+                    orderable : false//禁用排序
+                }
+            ],
+            "createdRow": function ( row, data, index ) {
+                //不使用render，改用jquery文档操作呈现单元格
+                var $ul = $('<ul class="buttonlist"></ul>')
+                var $btnEdit = $('<li><a class="btn btn2 btn_flag btn-edit"><span>编辑</span></a></li>');
+                var $btnDel = $('<li><a class="btn btn2 btn_trash btn-del" onclick="deleteNewsMaterial()"><span>删除</span></a></li>');
+//                var $btnEdit = $('<button type="button" class="btn-edit">修改</button>');
+//                var $btnDel = $('<button type="button" class="btn-del">删除</button>');
+                $ul = $ul.append($btnDel).append($btnEdit);
+                var $ob = $('td', row).eq(6).append($ul);
+
+            },
+            "drawCallback": function( settings ) {
+                $table.find("tr").addClass("gradeX");
+                //渲染完毕后的回调
+                //默认选中第一行
+                //$("tbody tr",$table).eq(0).click();
+            }
+        })).api();
+    }
+    queryNewsMaterial();
+
+    var userManage = {
+        getQueryCondition : function(data) {
+            var param = {};
+            //组装排序参数
+            if (data.order && data.order.length && data.order[0]) {
+                switch (data.order[0].column) {
+                    case 0:
+                        param.orderColumn = "is_syn";//数据库列名称
+                        break;
+                    case 1:
+                        param.orderColumn = "media_id";//数据库列名称
+                        break;
+                    case 2:
+                        param.orderColumn = "news_name";//数据库列名称
+                        break;
+                    case 3:
+                        param.orderColumn = "sys_id";//数据库列名称
+                        break;
+                    default:
+                        param.orderColumn = "is_syn";//数据库列名称
+                        break;
+                }
+                //排序方式asc或者desc
+                param.orderDir = data.order[0].dir;
+            }
+            param.id = $("#id-search").val();//查询条件
+            param.name = $("#name-search").val();//查询条件
+            param.status = $("#status-search").val();//查询条件
+            //组装分页参数
+            param.startIndex = data.start;
+            param.pageSize = data.length;
+            param.draw = data.draw;
+            return param;
+        },
+        editItemInit : function(item) {
+            //编辑方法
+            alert("编辑"+item.sys_id+"  "+item.news_name);
+        },
+        deleteItem : function(item) {
+            //删除
+            alert("删除"+item.sys_id+"  "+item.news_name);
+        },
+        showItemDetail: function(item){
+            //点击行
+            alert("点击"+item.sys_id+"  "+item.news_name);
+        }
+    };
+
+//    编辑图文素材模板
+    function updateNewsMaterial(){
+        $.ajax({
+            url: "/bpawn5/news/updateNewsMaterial",
+            type:"POST",
+            contentType: "text/html;charset=utf-8",
+            data:JSON.stringify({'sys_id':'201711211008153822A863A02D4C349C8B95EC05BEE2CA605','news_name':'mm'}),
+            success: function(data){
+                alert(JSON.stringify(data));
+                alert("编辑成功")
+            },
+            error: function(err){
+                console.log(err);
+            }
+        });
+    }
+
+//    删除图文素材模板
+    function deleteNewsMaterial(){
+//        var rows = $('#dyntable_img_text').dataTable('getSelections');
+//        if (rows.length == 0) {
+//            Modal.alert({
+//                msg : "请选择要删除的数据"
+//            });
+//            return;
+//        }
+        /*封装的表单提示确认框*/
+//        Modal.confirm({
+//            msg : "确认要删除选中的'" + rows.length + "'条数据吗?"
+//        }).on(function(e) {
+//            if (!e)         //点击取消，直接返回
+//                return;
+////            var url = "batchDel.htm?time=" + new Date().getTime();
+//            var ids = new Array();
+//            //遍历所有选择的行数据，取每条数据对应的ID
+//            $.each(rows, function(i, row) {
+//                ids[i] = row['sys_id'];
+//            });
+            //定义ajax请求参数
+//            var url = '/bpawn5/news/deleteNewsMaterial';
+//            var param = JSON.stringify(ids);
+//            var param =JSON.stringify(['20171121102118373C9DA3DE5995542F2986B1BE2AA5D3FDD']);
+//            $.ajax({
+//                type : "post",
+//                url : url,
+//                contentType: "text/html;charset=utf-8",
+//                data : param,
+//                datatype : "json",
+//                success : function(data) {
+//                    if (data.status == "succ")
+//                        Modal.alert({
+//                            msg : "删除成功"
+//                        });
+//                    else
+//                        Modal.alert({
+//                            msg : "删除失败"
+//                        });
+//                    doQuery();
+//                },
+//                error : function() {
+//                    Modal.alert({
+//                        msg : "服务器没有返回数据，可能服务器忙，请重试"
+//                    });
+//                }
+//            });
+//        });
+
+
+        var url = '/bpawn5/news/deleteNewsMaterial';
+        var param = JSON.stringify(['20171121102118373C9DA3DE5995542F2986B1BE2AA5D3FDD']);
+        $.ajax({
+            url: url,
+            type:"POST",
+            contentType: "text/html;charset=utf-8",
+            data:param,
+            success: function(data){
+                alert(JSON.stringify(data));
+                alert("删除成功");
+                queryNewsMaterial();
+            },
+            error: function(err){
+                console.log(err);
+            }
+        });
+    }
+
+//    多行删除
+    $(function(){
+        $("#delimagetext").click(function() {
+            $("input[name='imagetext']:checked").each(function() { // 遍历选中的checkbox
+                n = $(this).parents("tr").index();  // 获取checkbox所在行的顺序
+                $("table #dyntable_img_text").find("tr:eq("+n+")").remove();
+            });
+        });
+    });
+
+    var image = '';
+    function selectImage(file){
+        if(!file.files || !file.files[0]){
+            return;
+        }
+        var reader = new FileReader();
+        reader.onload = function(evt){
+            document.getElementById('image').src = evt.target.result;
+            image = evt.target.result;
+        }
+        reader.readAsDataURL(file.files[0]);
+    }
+    function uploadImage(){
+
+        $.ajax({
+            type:'POST',
+            url: 'ajax/uploadimage',
+            data: {image: image},
+            async: false,
+            dataType: 'json',
+            success: function(data){
+                if(data.success){
+                    alert('上传成功');
+                }else{
+                    alert('上传失败');
+                }
+            },
+            error: function(err){
+                alert('网络故障');
+            }
+        });
+
+    }
+
+
+
+    jQuery('.checkall, .checkall2').click(function(){
+        if(jQuery(this).is(':checked')) {
+            jQuery(this).parents('table')
+                .find('input:checkbox')
+                .each(function(){
+
+                    jQuery(this).attr('checked',true);
+
+                    //check if this checkbox is part of the list(tbody) not in the header/footer (thead/tfoot)
+                    //this will add class "selected" in a row when checked
+                    if(jQuery(this).parents('tbody').length > 0)
+                        jQuery(this).parents('tr').addClass('selected');
+                });
+        } else {
+            jQuery(this).parents('table')
+                .find('input:checkbox')
+                .each(function(){
+
+                    jQuery(this).attr('checked',false);
+
+                    //check if this checkbox is part of the list(tbody) not in the header/footer (thead/tfoot)
+                    //this will remove class "selected" in a row when unchecked
+                    if(jQuery(this).parents('tbody').length > 0)
+                        jQuery(this).parents('tr').removeClass('selected');
+                });
+        }
+
+        //this is needed to remain the checkbox in transformed (uniform) state
+        jQuery.uniform.update();
+    });
+
+
+    ///// EACH CHECKBOX CLICK EVENT /////
+    jQuery('.mailinbox input:checkbox').each(function(){
+        jQuery(this).click(function(){
+            if(!jQuery(this).is(':checked')) {
+
+                //this will hide trash icon only when there are no selected row
+                var hidetrash = true;
+                jQuery('.mailinbox tbody input:checkbox').each(function(){
+                    if(jQuery(this).is(':checked'))
+                        hidetrash = false;
+                });
+
+                if(hidetrash)
+                    jQuery('.dropdown_label, .reportspam, .msgtrash').hide();
+
+                //check if this checkbox is part of the list(tbody) not in the header/footer (thead/tfoot)
+                //this will remove class "selected" in a row when checked
+                if(jQuery(this).parents('tbody').length > 0)
+                    jQuery(this).parents('tr').removeClass('selected');
+
+            } else {
+
+                //we use css({display:block}) instead of show() because show() is
+                //using display: inline to show element
+                jQuery('.dropdown_label, .reportspam, .msgtrash').css({display: 'block'});
+
+                //check if this checkbox is part of the list(tbody) not in the header/footer (thead/tfoot)
+                //this will add class "selected" in a row when checked
+                if(jQuery(this).parents('tbody').length > 0)
+                    jQuery(this).parents('tr').addClass('selected');
+
+            }
+        });
+    });
+
+
+
+</script>
+</html>

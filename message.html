@@ -1,0 +1,114 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>查看消息页面</title>
+<link rel="stylesheet" href="css/style.default.css" type="text/css" />
+<link rel="stylesheet" href="css/mask.css" type="text/css">
+<script type="text/javascript" src="js/plugins/jquery-1.7.min.js"></script>
+<!--&lt;!&ndash;<script type="text/javascript" src="js/plugins/jquery-ui-1.8.16.custom.min.js"></script>&ndash;&gt;-->
+<script type="text/javascript" src="js/plugins/jquery.cookie.js"></script>
+<script type="text/javascript" src="js/plugins/jquery.alerts.js"></script>
+<script type="text/javascript" src="js/plugins/jquery.uniform.min.js"></script>
+<!--<script type="text/javascript" src="js/custom/general.js"></script>-->
+<script type="text/javascript" src="js/custom/messages.js"></script>
+
+    <script type="text/javascript" charset="utf-8" src="ueditor/ueditor.config.js"></script>
+    <script type="text/javascript" charset="utf-8" src="js/ueditor/ueditor.all.min.js"></script>
+<!--[if IE 9]>
+    <link rel="stylesheet" media="screen" href="css/style.ie9.css"/>
+<![endif]-->
+<!--[if IE 8]>
+    <link rel="stylesheet" media="screen" href="css/style.ie8.css"/>
+<![endif]-->
+<!--[if lt IE 9]>
+	<script src="js/plugins/css3-mediaqueries.js"></script>
+<![endif]-->
+</head>
+<body class="withvernav">
+<div class="bodywrapper">
+    <div class="headercontent">
+
+    </div><!--header-->
+
+    <div class="mediatecontent"></div><!--mediatecontent-->
+    
+</div><!--bodywrapper-->
+
+</body>
+<script type="text/javascript" src="js/theme/header.js"></script>
+<script type="text/javascript" src="js/theme/message.js"></script>
+<script type="text/javascript" src="js/custom/common.js"></script>
+<script type="text/javascript" charset="utf-8" src="js/ueditor/editor_api.js"></script>
+<script type="text/javascript">
+
+
+    $(".vernav ul li").click(function(){
+        $(this).siblings().removeClass("current");
+        $(this).addClass("current");
+        $(".centercontent").css("display","none");
+    })
+
+    $("#a").click(function () {
+        $("#aa").css("display","block");
+    })
+    $("#b").click(function () {
+        $("#bb").css("display","block");
+    })
+    $("#c").click(function () {
+        $("#cc").css("display","block");
+    })
+    $("#d").click(function () {
+        $("#dd").css("display","block");
+    })
+    $("#e").click(function () {
+        $("#ee").css("display","block");
+    })
+    $("#f").click(function () {
+        $("#ff").css("display","block");
+    })
+
+    $(document).ready(function(){
+        var editor = new baidu.editor.ui.Editor();
+        editor.render("myEditor");
+    })
+    $(document).ready(function(){
+        var editor = new baidu.editor.ui.Editor();
+        editor.render("myEditortext");
+    })
+
+    $("#btnuploadimagetext").click(function(){
+        $("#imagetextinput").css("display","block");
+        openNew("imagetextinput");
+    });
+    $("#btnuploadtext").click(function(){
+        $("#textinput").css("display","block");
+        openNew("textinput");
+    });
+    $("#uploadvoice").click(function(){
+        $("#voice").css("display","block");
+        openNew("voice");
+    });
+    $("#uploadvideo").click(function(){
+        $("#video").css("display","block");
+        openNew("video");
+    });
+
+    function delTableRow(rowIndex){
+        var tbobj=document.getElementById("dyntable2");
+        if(rowIndex==-1){
+            if(tbobj.tbody.rows.length>1){
+                tbobj.deleteRow(tbobj.tbody.rows.length-1);
+            }
+        }else{
+            tbobj.tbody.deleteRow(rowIndex);
+        }
+    }
+    $(".btn btn2 btn_trash").click(function(){
+        delTableRow(this.parentNode.parentNode.parentNode.parentNode.rowIndex)
+    })
+
+
+</script>
+</html>

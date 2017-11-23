@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="2ce66618-ec7e-4302-8ba3-f64826a0be26" name="weixin" url="http://localhost">
+        <fileTransfer port="0" mountedRoot="D:\Nginx\html" accessType="MOUNT" />
+      </webServer>
+    </option>
+  </component>
+</project>

@@ -1,0 +1,104 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>数据表格页面</title>
+    <link rel="stylesheet" href="css/mask.css">
+    <!--<link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">-->
+    <link rel="stylesheet" href="css/style.default.css" type="text/css" />
+    <!--<script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>-->
+    <script type="text/javascript" src="js/plugins/jquery-1.7.min.js"></script>
+    <!--<script type="text/javascript" src="js/plugins/jquery-ui-1.8.16.custom.min.js"></script>-->
+    <!--<script type="text/javascript" src="js/plugins/jquery.cookie.js"></script>-->
+    <script type="text/javascript" src="js/plugins/jquery.flot.min.js"></script>
+    <script type="text/javascript" src="js/plugins/jquery.flot.pie.js"></script>
+    <script type="text/javascript" src="js/plugins/jquery.flot.resize.min.js"></script>
+    <!--<script type="text/javascript" src="js/custom/general.js"></script>-->
+    <script type="text/javascript" src="js/custom/charts.js"></script>
+
+    <!--<script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>-->
+<!--[if IE 9]>
+    <link rel="stylesheet" media="screen" href="css/style.ie9.css"/>
+<![endif]-->
+<!--[if IE 8]>
+    <link rel="stylesheet" media="screen" href="css/style.ie8.css"/>
+<![endif]-->
+<!--[if lt IE 9]>
+	<script src="js/plugins/css3-mediaqueries.js"></script>
+<![endif]-->
+</head>
+
+<style>
+    .buttonlist{
+        height: 33px;
+    }
+</style>
+
+<body class="withvernav">
+<div class="bodywrapper">
+    <div class="headercontent">
+
+    </div><!--header-->
+
+    <div class="mediatecontent"></div><!--mediatecontent-->
+    
+    
+</div><!--bodywrapper-->
+
+</body>
+<script type="text/javascript" src="js/theme/header.js"></script>
+<script type="text/javascript" src="js/theme/statistical.js"></script>
+<script type="text/javascript" src="js/custom/common.js"></script>
+<script type="text/javascript">
+
+
+    $("#a").click(function () {
+        $("#aa").css("display","block");
+    })
+    $("#b").click(function () {
+        $("#bb").css("display","block");
+    })
+    $("#c").click(function () {
+        $("#cc").css("display","block");
+    })
+
+    $('.hornav a').click(function(){
+
+        //this is only applicable when window size below 450px
+        if($(this).parents('.more').length == 0)
+            $('.hornav li.more ul').hide();
+
+        //remove current menu
+        $('.hornav li').each(function(){
+            $(this).removeClass('current');
+        });
+
+        $(this).parent().addClass('current');	// set as current menu
+
+        var url = $(this).attr('href');
+        if($(url).length > 0) {
+            $('.contentwrapper .subcontent').hide();
+            $(url).show();
+        } else {
+            $.post(url, function(data){
+                $('#contentwrapper').html(data);
+                $('.stdtable input:checkbox').uniform();	//restyling checkbox
+            });
+        }
+        return false;
+    });
+
+    $("#btnin").click(function(){
+        $("#uploadmenu").css("display","block");
+        openNew("uploadmenu");
+    });
+    $("#btned").click(function(){
+        $("#editmenu").css("display","block");
+        openNew("editmenu");
+    });
+
+
+
+</script>
+</html>
